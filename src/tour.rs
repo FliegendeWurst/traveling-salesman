@@ -19,7 +19,7 @@ impl Tour {
             fitness: 0.0,
             relative_fitness: 0.0,
             amplified_fitness: 0.0,
-            tour: vec[City::default(); size],
+            tour: vec![City::default(); size],
         }
     }
 
