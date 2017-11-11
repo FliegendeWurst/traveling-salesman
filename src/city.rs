@@ -10,5 +10,3 @@ impl Default for City {
         City { x: -1, y: -1 }
     }
 }
-
-pub const CITY_COUNT: usize = 20;
