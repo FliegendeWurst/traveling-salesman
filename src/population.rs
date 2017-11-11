@@ -20,7 +20,7 @@ impl Population {
     pub fn initialize_from_cities(&mut self, rng: &mut rand::ThreadRng, city_list: &Vec<City>) {
         assert_eq!(self.tours.len(), 0);
         for _ in 0..POP_COUNT {
-            let mut new_tour = Tour::new();
+            let mut new_tour = Tour::new(city_list.len());
             new_tour.generate_individual(rng, &city_list);
             self.tours.push(new_tour);
         }
