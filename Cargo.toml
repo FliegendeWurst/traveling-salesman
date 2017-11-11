@@ -1,8 +1,8 @@
 [package]
-name = "TravelingSalesman"
+name = "traveling-salesman"
 version = "0.1.0"
 authors = ["charles"]
 
 [dependencies]
-rand = "*"
-num = "*"
+rand = "0.3"
+num = "0.1"
