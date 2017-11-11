@@ -5,7 +5,7 @@ use self::rand::Rng;
 use city::*;
 
 pub struct Tour {
-    tour: Vec<City>,
+    pub tour: Vec<City>,
     pub fitness: f32,
     pub relative_fitness: f32,
     pub amplified_fitness: f32,
