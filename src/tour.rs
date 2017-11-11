@@ -1,7 +1,7 @@
 extern crate rand;
 extern crate num;
-use num::*;
-use rand::Rng;
+use self::num::*;
+use self::rand::Rng;
 use city::*;
 
 pub struct Tour {
