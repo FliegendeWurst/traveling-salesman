@@ -5,7 +5,7 @@ use self::rand::Rng;
 use city::*;
 
 pub struct Tour {
-    tour: [City; CITY_COUNT],
+    tour: Vec<City>,
     pub fitness: f32,
     pub relative_fitness: f32,
     pub amplified_fitness: f32,
@@ -14,26 +14,24 @@ pub struct Tour {
 const AMPLIFY_FACTOR: f32 = 2f32;
 
 impl Tour {
-    pub fn new() -> Tour {
+    pub fn new(size: usize) -> Tour {
         Tour { 
             fitness: 0.0,
             relative_fitness: 0.0,
             amplified_fitness: 0.0,
-            tour: [City::default(); CITY_COUNT],
+            tour: vec[City::default(); size],
         }
     }
 
     pub fn generate_individual(&mut self, rng: &mut rand::ThreadRng, city_list: &Vec<City>) {
-        assert_eq!(city_list.len(), CITY_COUNT);
-
         // copy cities in original sequence
-        for i in 0..CITY_COUNT {
+        for i in 0..city_list.len() {
             self.tour[i] = city_list[i];
         }
         // shuffle to create new sequence
         for _ in 0..100 {
-            for j in 0..CITY_COUNT {
-                let random_index: i32 = rng.gen_range(0, CITY_COUNT as i32);
+            for j in 0..city_list.len() {
+                let random_index: i32 = rng.gen_range(0, city_list.len() as i32);
                 if random_index != j as i32
                 {
                     // swap the city at j with the city at random_index:
@@ -89,12 +87,12 @@ impl Tour {
 
     pub fn get_distance(&self) -> i32 {
         let mut tour_distance: i32 = 0;
-        for i in 0..CITY_COUNT {
+        for i in 0..self.tour.len() {
             let from_city = self.tour[i];
             let destination_city =
                 // check we're not on our tour's last city, if we are set our
                 // tour's final destination city to our starting city
-                if i + 1 < CITY_COUNT {
+                if i + 1 < self.tour.len() {
                     self.tour[i + 1]
                 } else {
                     self.tour[0]
