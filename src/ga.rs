@@ -40,7 +40,7 @@ impl GA {
     }
 
     fn crossover(rng: &mut rand::ThreadRng, parent1: &Tour, parent2: &Tour) -> Tour {
-        let mut child: Tour = Tour::new();
+        let mut child: Tour = Tour::new(parent1.tour.len());
 
         // Get start and end sub tour positions for parent1's tour
         let start_pos: usize = rng.gen_range(0, parent1.tour.len());
@@ -65,7 +65,7 @@ impl GA {
             // If child doesn't have the city add it
             if !child.contains_city(parent2.get_city(i)) {
                 // Loop to find a spare position in the child's tour
-                for j in 0..CITY_COUNT {
+                for j in 0..parent1.tour.len() {
                     // Spare position found, add city
                     if child.get_city(j).x == -1 {
                         child.set_city(j, parent2.get_city(i));
