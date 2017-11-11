@@ -43,11 +43,11 @@ impl GA {
         let mut child: Tour = Tour::new();
 
         // Get start and end sub tour positions for parent1's tour
-        let start_pos: usize = rng.gen_range(0, CITY_COUNT);
-        let end_pos: usize = rng.gen_range(0, CITY_COUNT);
+        let start_pos: usize = rng.gen_range(0, parent1.tour.len());
+        let end_pos: usize = rng.gen_range(0, parent1.tour.len());
 
         // Loop and add the sub tour from parent1 to our child
-        for i in 0..CITY_COUNT {
+        for i in 0..parent1.tour.len() {
             // If our start position is less than the end position
             if start_pos < end_pos && i > start_pos && i < end_pos {
                 child.set_city(i, parent1.get_city(i));
@@ -61,7 +61,7 @@ impl GA {
         }
 
         // Loop through parent2's city tour
-        for i in 0..CITY_COUNT {
+        for i in 0..parent1.tour.len() {
             // If child doesn't have the city add it
             if !child.contains_city(parent2.get_city(i)) {
                 // Loop to find a spare position in the child's tour
@@ -80,7 +80,7 @@ impl GA {
 
     fn mutate(rng: &mut rand::ThreadRng, tour: &mut Tour) {
         // Loop through tour cities
-        for tour_pos1 in 0..CITY_COUNT {
+        for tour_pos1 in 0..tour.tour.len() {
             // Apply mutation rate
             if rng.gen::<f32>() < MUTATION_RATE {
                 // Get a second random position in the tour
